@@ -2,7 +2,9 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import * as XLSX from "xlsx";
-import logo  from '../assets/attendance-logo.webp'
+import logo from '../assets/attendance-logo.webp'
+import { ChevronLeft, ChevronRight } from "lucide-react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const AttendanceSheetGenerator = () => {
     const [activeTab, setActiveTab] = useState("upload");
@@ -11,6 +13,8 @@ const AttendanceSheetGenerator = () => {
     const [textContent, setTextContent] = useState("");
     const [showTable, setShowTable] = useState(false);
     const [dates, setDates] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1)
+    const rowsPerPage = 10
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -109,6 +113,16 @@ const AttendanceSheetGenerator = () => {
         XLSX.writeFile(workbook, "Attendance_Report.xlsx");
     };
 
+
+    const handlePageChange = (page) => {
+        setCurrentPage(page)
+    }
+
+    const totalPages = Math.ceil(Object.keys(attendanceData).length / rowsPerPage)
+    const currentPageData = Object.entries(attendanceData).slice(
+        (currentPage - 1) * rowsPerPage,
+        currentPage * rowsPerPage
+    )
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-purple-400 via-pink-500 to-yellow-500 flex items-center justify-center p-4">
@@ -257,7 +271,7 @@ Roll: 1,2,3,4,5,....
                             <p className="text-sm text-blue-700">
                                 File Format: Start each date with &apos;Date:&apos; followed by
                                 the date (DD-MM-YYYY). List each present student&apos;s roll
-                                number with &apos;Roll:&apos; on a new line.<br/>
+                                number with &apos;Roll:&apos; on a new line.<br />
                             </p>
                         </div>
                         <div className="flex justify-center space-x-4 mt-6">
@@ -376,22 +390,23 @@ Roll: 1,2,3,4,5,....
             </AnimatePresence> */}
                         {/* Show Table */}
                         {showTable && (
-                            <div className="mt-4">
-                                <h2 className="text-xl uppercase font-semibold mb-4">Attendance Table</h2>
-                                <table className="table-auto border-collapse border border-gray-400 w-full">
-                                    <thead>
-                                        <tr>
-                                            <th className="border border-gray-300 px-4 py-2">Roll</th>
-                                            {dates.map((date, index) => (
-                                                <th key={index} className="border border-gray-300 px-4 py-2">
-                                                    {date}
-                                                </th>
-                                            ))}
-                                            <th className="border border-gray-300 px-4 py-2">Present Count</th>
-                                            <th className="border border-gray-300 px-4 py-2">Percentage</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                            <>
+                                <div className="mt-4 overflow-x-auto">
+                                    <h2 className="text-xl uppercase font-semibold mb-4">Attendance Table</h2>
+                                    <table className="table-auto border-collapse border border-gray-400 w-full">
+                                        <thead>
+                                            <tr>
+                                                <th className="border border-gray-300 px-4 py-2">Roll</th>
+                                                {dates.map((date, index) => (
+                                                    <th key={index} className="border border-gray-300 px-4 py-2">
+                                                        {date}
+                                                    </th>
+                                                ))}
+                                                <th className="border border-gray-300 px-4 py-2">Present Count</th>
+                                                <th className="border border-gray-300 px-4 py-2">Percentage</th>
+                                            </tr>
+                                        </thead>
+                                        {/* <tbody>
                                         {Object.entries(attendanceData).map(([roll, statuses]) => {
                                             const presentCount = statuses.filter((status) => status === "P").length;
                                             const percentage = presentCount > 0 ? (presentCount / dates.length) * 100 : 0;
@@ -410,17 +425,47 @@ Roll: 1,2,3,4,5,....
                                                 </tr>
                                             );
                                         })}
-                                    </tbody>
-                                </table>
+                                    </tbody> */}
+                                        <tbody>
+                                            {currentPageData.map(([roll, statuses]) => {
+                                                const presentCount = statuses.filter((status) => status === "P").length
+                                                const percentage = presentCount > 0 ? (presentCount / dates.length) * 100 : 0
+                                                return (
+                                                    <tr key={roll}>
+                                                        <td className="border px-4 py-2 sticky-column">{roll}</td>
+                                                        {statuses.map((status, index) => (
+                                                            <td key={index} className="border px-4 py-2">{status}</td>
+                                                        ))}
+                                                        <td className="border px-4 py-2">{presentCount}</td>
+                                                        <td className="border px-4 py-2">{percentage.toFixed(2)}%</td>
+                                                    </tr>
+                                                )
+                                            })}
+                                        </tbody>
+                                    </table>
 
-                                {/* Generate Excel Button */}
-                                <button
-                                    // onClick={handleGenerateExcel}
-                                    className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                                >
-                                    Print
-                                </button>
-                            </div>
+                                </div>
+                                <div className="flex justify-between items-center mt-4">
+                                    <button
+                                        onClick={() => handlePageChange(currentPage - 1)}
+                                        disabled={currentPage === 1}
+                                        className="flex align-items-center justify-center bg-gray-200 py-2 px-4 rounded-md"
+                                    >
+                                        {/* <ChevronLeft className="mr-2 h-4 w-4" /> Previous */}
+                                        Previous
+                                    </button>
+                                    <span>
+                                        Page {currentPage} of {totalPages}
+                                    </span>
+                                    <button
+                                        onClick={() => handlePageChange(currentPage + 1)}
+                                        disabled={currentPage === totalPages}
+                                        className="flex align-items-center justify-center bg-gray-200 py-2 px-4 rounded-md"
+                                    >
+                                        Next <FontAwesomeIcon icon="fa-solid fa-arrow-right" />
+                                    </button>
+                                </div>
+                            </>
                         )}
                     </div>
                 </div>
