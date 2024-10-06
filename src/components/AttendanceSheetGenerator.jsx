@@ -395,18 +395,18 @@ Roll: 1,2,3,4,5,....
                         {showTable && (
                             <>
                                 <div className="mt-4 overflow-x-auto">
-                                    <h2 className="text-xl uppercase font-semibold mb-4">Attendance Table</h2>
+                                    <h2 className="text-xl text-start font-bold mb-4">Attendance Table : </h2>
                                     <table className="table-auto border-collapse border border-gray-400 w-full">
                                         <thead>
-                                            <tr>
-                                                <th className="border border-gray-300 px-4 py-2">Roll</th>
+                                            <tr className="bg-blue-600 text-white">
+                                                <th className="border text-center border-gray-300 px-4 py-2">Roll</th>
                                                 {dates.map((date, index) => (
-                                                    <th key={index} className="border border-gray-300 px-4 py-2">
+                                                    <th key={index} className="border text-center border-gray-300 px-4 py-2">
                                                         {date}
                                                     </th>
                                                 ))}
-                                                <th className="border border-gray-300 px-4 py-2">Present Count</th>
-                                                <th className="border border-gray-300 px-4 py-2">Percentage</th>
+                                                <th className="border text-center border-gray-300 px-4 py-2">Present Count</th>
+                                                <th className="border text-center border-gray-300 px-4 py-2">Percentage</th>
                                             </tr>
                                         </thead>
                                         {/* <tbody>
@@ -435,7 +435,7 @@ Roll: 1,2,3,4,5,....
                                                 const percentage = presentCount > 0 ? (presentCount / dates.length) * 100 : 0
                                                 return (
                                                     <tr key={roll}>
-                                                        <td className="border px-4 py-2 text-center sticky-column">{roll}</td>
+                                                        <td className="border px-4 py-2 font-semibold text-center sticky-column">{roll}</td>
                                                         {statuses.map((status, index) => (
                                                             <td key={index} className="border text-center px-4 py-2">{status}</td>
                                                         ))}
