@@ -146,9 +146,9 @@ const AttendanceSheetGenerator = () => {
                         <h2 className="text-xl font-semibold text-center mb-[4px]">
                             Attendance Sheet Generator
                         </h2>
-                        <h4 className="text-[9px] text-center">Made By Sharif Ahmed</h4>
-                        <h6 className="text-[9px] text-center">Lecturer,ICT</h6>
-                        <h6 className="text-[9px] text-center">Heako Banani Degree College</h6>
+                        <h4 className="text-[11px] text-center">Made By Sharif Ahmed</h4>
+                        <h6 className="text-[11px] text-center">Lecturer, ICT</h6>
+                        <h6 className="text-[11px] text-center">Heako Banani Degree College</h6>
                     </div>
                     <div className="p-6">
                         <div className="mb-6">
