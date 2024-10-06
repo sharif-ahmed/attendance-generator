@@ -258,13 +258,6 @@ Roll: 1,2,3,4,5,....
                                 File Format: Start each date with &apos;Date:&apos; followed by
                                 the date (DD-MM-YYYY). List each present student&apos;s roll
                                 number with &apos;Roll:&apos; on a new line.<br/>
-                                <u>Example Format:</u><br/>
-
-                                Date 1: DD-MM-YYYY<br/>
-                                Roll: 1,2,3,4,5,....<br/><br/>
-
-                                Date 2: DD-MM-YYYY<br/>
-                                Roll: 1,2,3,4,5,....<br/><br/>
                             </p>
                         </div>
                         <div className="flex justify-center space-x-4 mt-6">
