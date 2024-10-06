@@ -399,7 +399,7 @@ Roll: 1,2,3,4,5,....
                                     <table className="table-auto border-collapse border border-gray-400 w-full">
                                         <thead>
                                             <tr className="bg-blue-600 text-white">
-                                                <th className="border text-center border-gray-300 px-4 py-2">Roll</th>
+                                                <th className="border text-center border-gray-300 px-4 py-2 sticky-column-2">Roll</th>
                                                 {dates.map((date, index) => (
                                                     <th key={index} className="border text-center border-gray-300 px-4 py-2">
                                                         {date}

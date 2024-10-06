@@ -8,3 +8,10 @@
     background-color: white; /* Background color to cover the content behind it */
     z-index: 10; /* Higher z-index to ensure it's above other cells */
   }
+
+  .sticky-column-2 {
+    position: sticky;
+    left: 0; /* This keeps the first column fixed to the left */
+    background-color: #2563eb; /* Background color to cover the content behind it */
+    z-index: 10; /* Higher z-index to ensure it's above other cells */
+  }
