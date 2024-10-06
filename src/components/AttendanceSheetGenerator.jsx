@@ -435,12 +435,12 @@ Roll: 1,2,3,4,5,....
                                                 const percentage = presentCount > 0 ? (presentCount / dates.length) * 100 : 0
                                                 return (
                                                     <tr key={roll}>
-                                                        <td className="border px-4 py-2 sticky-column">{roll}</td>
+                                                        <td className="border px-4 py-2 text-center sticky-column">{roll}</td>
                                                         {statuses.map((status, index) => (
-                                                            <td key={index} className="border px-4 py-2">{status}</td>
+                                                            <td key={index} className="border text-center px-4 py-2">{status}</td>
                                                         ))}
-                                                        <td className="border px-4 py-2">{presentCount}</td>
-                                                        <td className="border px-4 py-2">{percentage.toFixed(2)}%</td>
+                                                        <td className="border px-4 text-center py-2">{presentCount}</td>
+                                                        <td className="border px-4 text-center py-2">{percentage.toFixed(2)}%</td>
                                                     </tr>
                                                 )
                                             })}
