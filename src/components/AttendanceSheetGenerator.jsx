@@ -394,7 +394,7 @@ Roll: 1,2,3,4,5,....
                         {/* Show Table */}
                         {showTable && (
                             <>
-                                <h2 className="text-xl text-start font-bold mb-4">Attendance Table : </h2>
+                                <h2 className="text-xl text-start font-bold my-4">Attendance Table : </h2>
                                 <div className="mt-4 overflow-x-auto">
                                     <table className="table-auto border-collapse border border-gray-400 w-full">
                                         <thead>
